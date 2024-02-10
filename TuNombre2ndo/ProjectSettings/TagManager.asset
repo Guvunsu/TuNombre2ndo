@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - caracter
-  - 
+  - TileMap
   - 
   - 
   - 
@@ -39,6 +39,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 951838253
+    locked: 0
+  - name: tilemap
+    uniqueID: 3336023115
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
