@@ -22,6 +22,10 @@ public class MovementPlayer : MonoBehaviour
     private float HiInput;
 
 
+    //cosas de animacion 
+    [SerializeField]
+    private Animator animators;
+
     void Start()
     {
         // getcomponents abajo
@@ -63,29 +67,29 @@ public class MovementPlayer : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             MoveSpeed = 1400;
-            animator.SetBool("IsRuning", true);
+            animator.SetBool("Runing", true);
         }
         else
         {
             MoveSpeed = 700;
-            animator.SetBool("IsRuning", false);
+            animator.SetBool("Runing", false);
         }
 
 
         // voltear sprite
 
-        if (Move.x < 0)
+        if (Move.x > 0)
         {
             Sprite.flipX = false;
-            animator.SetBool("Iswalking", true);
+            animator.SetBool("Walking", true);
 
         }
-        else if (Move.x > 0)
+        else if (Move.x < 0)
         {
             Sprite.flipX = true;
-            animator.SetBool("Iswalking", true);
+            animator.SetBool("Walking", true);
         }
-        else animator.SetBool("Iswalking", false);
+        else animator.SetBool("IDLE", false);
 
     }
     private void Jump()
@@ -96,7 +100,7 @@ public class MovementPlayer : MonoBehaviour
         {
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
             Jumps++;
-            animator.SetBool("IsJumping", true);
+            animator.SetBool("Jumping", true);
 
         }
     }
