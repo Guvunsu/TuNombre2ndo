@@ -44,6 +44,11 @@ public class MovementPlayer : MonoBehaviour
         // definicion de varialbles
 
         HiInput = Input.GetAxisRaw("Horizontal");
+
+        animator.SetFloat("Walking", Mathf.Abs ( HiInput)); 
+        //// visto en min 11:36 https://www.youtube.com/watch?v=hkaysu1Z-N8&list=PLPV2KyIb3jR6TFcFuzI2bB7TMNIIBpKMQ&index=13
+
+
         dt = Time.deltaTime;
         Move = new Vector2(HiInput * MoveSpeed * dt, rbPlayer.velocity.y);
         rbPlayer.velocity = Move;
@@ -121,7 +126,7 @@ public class MovementPlayer : MonoBehaviour
             if (Vector2.Angle(collision.GetContact(0).normal, Vector2.up) < 45)
             {
                 Jumps = 0;
-                animator.SetBool("IsJumping", false);
+                animator.SetBool("Jumping", false);
 
             }
 
