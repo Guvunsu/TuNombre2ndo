@@ -46070,7 +46070,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths: []
@@ -46307,11 +46307,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4dee1d29165f1be419535c9170f36309, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1149944666
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46412,8 +46412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c3f86945d5fef4baffa4508efdc07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpForce: 15
+  jumpMax: 2
   Sprite: {fileID: 1149944666}
-  animators: {fileID: 1149944667}
 --- !u!1 &1689937237
 GameObject:
   m_ObjectHideFlags: 0
