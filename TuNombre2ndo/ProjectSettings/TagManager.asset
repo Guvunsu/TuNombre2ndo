@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Floor
-  - Tilemap
+  - Background
   - Plataforma
+  - Tilemap
   layers:
   - Default
   - TransparentFX
@@ -14,10 +14,10 @@ TagManager:
   - Background
   - Water
   - UI
-  - 
-  - Tilemap
   - Plataforma
+  - Tilemap
   - Caracter
+  - 
   - 
   - 
   - 
@@ -47,11 +47,11 @@ TagManager:
   - name: BackGround
     uniqueID: 951838253
     locked: 0
-  - name: tilemap
-    uniqueID: 3336023115
-    locked: 0
   - name: Plataforma
     uniqueID: 2694558369
+    locked: 0
+  - name: tilemap
+    uniqueID: 3336023115
     locked: 0
   - name: caracter
     uniqueID: 1483394087

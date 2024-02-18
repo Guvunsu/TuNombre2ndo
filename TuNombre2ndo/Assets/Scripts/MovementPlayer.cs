@@ -8,7 +8,8 @@ public class MovementPlayer : MonoBehaviour
 
     private float MoveSpeed = 700;
     public float JumpForce;
-     int Jumps = 0;
+    int Jumps = 0;
+   //bool TocoSuelo;
 
     //cosas de FixedUpdate Fisicas 
 
@@ -76,12 +77,18 @@ public class MovementPlayer : MonoBehaviour
     {
         // salto
 
-        if (Input.GetKeyDown(KeyCode.V) && Jumps < 2)
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2)
         {
 
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
             Jumps++;
             animator.SetBool("Jumping", true);
+            animator.SetBool("fall", false);
+            // if (!TocoSuelo)
+            // {
+            animator.SetBool("Jumping", false);
+            animator.SetBool("fall", true);
+            // }
 
         }
 
