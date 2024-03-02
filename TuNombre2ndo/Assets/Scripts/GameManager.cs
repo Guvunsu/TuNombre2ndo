@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+    public PlayerManager Player;
     void Start()
     {
-        
+
     }
 
-    
+
     void Update()
     {
-        
+        if (!Player.isAlive)
+        {
+            Player.RestartPoint();
+        }
     }
 }
