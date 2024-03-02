@@ -7,6 +7,7 @@ TagManager:
   - Background
   - Plataforma
   - Tilemap
+  - Win
   layers:
   - Default
   - TransparentFX
