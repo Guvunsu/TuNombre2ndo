@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField]
     private float healthTimer = 0.5f;
     [SerializeField]
     private SpriteRenderer sprite;
+    [SerializeField]
     private int healthPóints = 100;
     [SerializeField]
     private int layerint;
