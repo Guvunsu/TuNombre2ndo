@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    private MovementPlayer movPlayer;
     [SerializeField]
     private float healthTimer = 0.5f;
     [SerializeField]
     private SpriteRenderer sprite;
     [SerializeField]
-    private int healthPóints = 100;
+    private int healthPoints = 100;
     [SerializeField]
     private int layerint;
     [SerializeField]
     private Transform respawnPoints;
     public bool isAlive = true;
+    private int lives = 3;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == ("Win"))
         {
             Debug.Log("Ganaste");
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == layerint)
+        {
+            sprite.color = Color.white;
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
@@ -31,13 +40,18 @@ public class PlayerManager : MonoBehaviour
             {
                 healthTimer -= Time.deltaTime;
             }
-            else if (healthTimer <= 0 && isAlive)
+            else if (healthTimer <= 0 && healthPoints >= 0)
             {
-                healthPóints--;
-                if (healthPóints < -0)
+                healthPoints--;
+                sprite.color = Color.blue;
+                if (healthPoints > 0)
+                {
+                    RestartPoint();
+                }
+                else if (lives < 0) 
                 {
                     isAlive = false;
-                    Debug.Log("perdiste");
+                    PlayerLose();
                 }
                 healthTimer = 0.5f;
             }
@@ -46,15 +60,16 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerLose()
     {
-        sprite.color = Color.cyan;
+        movPlayer.DisableMovement();
     }
 
     public void RestartPoint()
     {
         gameObject.transform.position = respawnPoints.position;
         sprite.color = Color.green;
-        healthPóints = 10;
-        isAlive = true;
+        healthPoints = 10;
+
+        movPlayer.EnableMovement();
     }
     void Start()
     {

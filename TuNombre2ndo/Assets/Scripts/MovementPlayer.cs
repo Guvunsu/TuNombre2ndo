@@ -118,6 +118,16 @@ public class MovementPlayer : MonoBehaviour
 
     }
 
+    public void DisableMovement()
+    {
+        MoveSpeed = 0;
+        JumpForce = 0;
+    }
+    public void EnableMovement()
+    {
+
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
 
