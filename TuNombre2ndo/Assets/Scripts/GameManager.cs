@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         if (!Player.isAlive)
         {
-            Player.RestartPoint();
+            Debug.Log("GameOver");
         }
     }
 }
