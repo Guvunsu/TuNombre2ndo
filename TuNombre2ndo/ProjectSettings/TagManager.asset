@@ -9,6 +9,7 @@ TagManager:
   - Tilemap
   - Win
   - ConfidentLimits
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - ZonaDeMuerte
   - Caracter
   - VC
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: caracter
     uniqueID: 1483394087
+    locked: 0
+  - name: Ui
+    uniqueID: 1105368351
     locked: 0

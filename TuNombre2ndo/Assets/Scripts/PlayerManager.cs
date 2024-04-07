@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerManager : MonoBehaviour
-{
+public class PlayerManager : MonoBehaviour {
     private MovementPlayer movPlayer;
     [SerializeField]
     private float healthTimer = 0.5f;
@@ -18,38 +18,26 @@ public class PlayerManager : MonoBehaviour
     public bool isAlive = true;
     private int lives = 3;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == ("Win"))
-        {
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag == ("Win")) {
             Debug.Log("Ganaste");
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == layerint)
-        {
+    private void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.layer == layerint) {
             sprite.color = Color.white;
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == layerint)
-        {
-            if (healthTimer > 0)
-            {
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (collision.gameObject.layer == layerint) {
+            if (healthTimer > 0) {
                 healthTimer -= Time.deltaTime;
-            }
-            else if (healthTimer <= 0 && healthPoints >= 0)
-            {
+            } else if (healthTimer <= 0 && healthPoints >= 0) {
                 healthPoints--;
                 sprite.color = Color.blue;
-                if (healthPoints > 0)
-                {
+                if (healthPoints > 0) {
                     RestartPoint();
-                }
-                else if (lives < 0) 
-                {
+                } else if (lives < 0) {
                     isAlive = false;
                     PlayerLose();
                 }
@@ -58,27 +46,26 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void PlayerLose()
-    {
+    public void PlayerLose() {
         movPlayer.DisableMovement();
     }
 
-    public void RestartPoint()
-    {
+    public void RestartPoint() {
         gameObject.transform.position = respawnPoints.position;
         sprite.color = Color.green;
         healthPoints = 10;
 
         movPlayer.EnableMovement();
     }
-    void Start()
-    {
+    public void LoadScene() {
+        SceneManager.LoadScene("WhenImDie", LoadSceneMode.Additive);
+    }
+    void Start() {
 
     }
 
 
-    void Update()
-    {
+    void Update() {
 
     }
 }

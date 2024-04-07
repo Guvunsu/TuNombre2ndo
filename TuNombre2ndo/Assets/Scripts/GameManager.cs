@@ -1,21 +1,39 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
+    public static GameManager Instance;
     public PlayerManager Player;
-    void Start()
-    {
+    public string sceneManager;
+    public GameObject losePanel;
+
+    private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(this);
+            Destroy(losePanel);
+        } else {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+    }
+    void Start() {
 
     }
 
 
-    void Update()
-    {
-        if (!Player.isAlive)
-        {
+    void Update() {
+        if (!Player.isAlive) {
+            losePanel.SetActive(true);
             Debug.Log("GameOver");
         }
+        if (Player == null) {
+            Player = FindObjectOfType<PlayerManager>();
+        }
+        //public void changeScene() {
+        //    sceneManager.LoadScene(sceneManager);
+        //}
     }
 }
