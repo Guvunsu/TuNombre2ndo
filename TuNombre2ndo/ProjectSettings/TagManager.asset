@@ -10,6 +10,7 @@ TagManager:
   - Win
   - ConfidentLimits
   - Enemy
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -56,9 +57,9 @@ TagManager:
   - name: tilemap
     uniqueID: 3336023115
     locked: 0
-  - name: caracter
-    uniqueID: 1483394087
-    locked: 0
   - name: Ui
     uniqueID: 1105368351
+    locked: 0
+  - name: caracter
+    uniqueID: 1483394087
     locked: 0

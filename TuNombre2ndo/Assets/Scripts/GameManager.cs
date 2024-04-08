@@ -1,9 +1,12 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+
+
     public static GameManager Instance;
     public PlayerManager Player;
     public string sceneManager;
@@ -12,7 +15,7 @@ public class GameManager : MonoBehaviour {
     private void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(this);
-            Destroy(losePanel);
+            Destroy(gameObject);
         } else {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -26,14 +29,14 @@ public class GameManager : MonoBehaviour {
 
     void Update() {
         if (!Player.isAlive) {
-            losePanel.SetActive(true);
+            gameObject.SetActive(true);
             Debug.Log("GameOver");
         }
         if (Player == null) {
             Player = FindObjectOfType<PlayerManager>();
         }
-        //public void changeScene() {
-        //    sceneManager.LoadScene(sceneManager);
-        //}
+        public void changeScene() {
+            SceneManager.LoadScene(scenemanager);
+        }
     }
 }

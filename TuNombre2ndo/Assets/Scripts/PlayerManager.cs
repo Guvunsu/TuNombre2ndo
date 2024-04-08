@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,13 @@ public class PlayerManager : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == ("Win")) {
             Debug.Log("Ganaste");
+
+            if (collision.gameObject.tag == ("Enemy")) {
+                isAlive = true;
+                Debug.Log("Lo Toque");
+            } else {
+                Destroy(collision.gameObject);
+            }
         }
     }
     private void OnCollisionExit2D(Collision2D collision) {
@@ -48,6 +56,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void PlayerLose() {
         movPlayer.DisableMovement();
+       
     }
 
     public void RestartPoint() {
@@ -57,9 +66,9 @@ public class PlayerManager : MonoBehaviour {
 
         movPlayer.EnableMovement();
     }
-    public void LoadScene() {
-        SceneManager.LoadScene("WhenImDie", LoadSceneMode.Additive);
-    }
+    //public void LoadScene() {
+    //    SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+    //}
     void Start() {
 
     }

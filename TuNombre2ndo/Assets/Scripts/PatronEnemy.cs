@@ -8,6 +8,8 @@ public class PatronEnemy : MonoBehaviour {
 
     //https://www.youtube.com/watch?v=RuvfOl8HhhM
 
+    public float dt;
+
     private Vector2 movEnemy;
     private Vector2 Point;
     private Vector3 localScale;
@@ -32,6 +34,7 @@ public class PatronEnemy : MonoBehaviour {
         Rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentPoint = PointB.transform;
+        currentPoint = PointA.transform;
         animator.SetBool("Walking", true);
     }
 
@@ -60,6 +63,23 @@ public class PatronEnemy : MonoBehaviour {
             spritEnemy.flipX = true;
             animator.SetBool("Walking", true);
         }
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision) {
+        dt = Time.deltaTime;
+        //if (movEnemy )
+        if (collision.gameObject.tag == "Player") {
+            Debug.Log("El jugador si me esta tocando");
+        }
+        {
+            if (collision.gameObject.tag == "Tilemap") {
+                movEnemy = new Vector2(speed, 1);
+                flip();
+            }
+        }
+        {
+
+        }
     }
     private void flip() {
         localScale = transform.localScale;
@@ -71,4 +91,5 @@ public class PatronEnemy : MonoBehaviour {
         Gizmos.DrawWireSphere(PointB.transform.position, 0.2f);
         Gizmos.DrawLine(PointA.transform.position, PointB.transform.position);
     }
+
 }
