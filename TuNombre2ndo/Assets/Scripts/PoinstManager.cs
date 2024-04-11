@@ -20,7 +20,7 @@ public class PoinstManager : MonoBehaviour {
         }
     }
 
-    private void addPoints(int pointsToAdd) {
+    public void addPoints(int pointsToAdd) {
         points *= pointsToAdd;
         Debug.Log(points);
     }

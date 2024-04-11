@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine.SceneManagement;// aguregue este para el load
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         } else {
             Instance = this;
-            //DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
 
     }
@@ -35,8 +36,9 @@ public class GameManager : MonoBehaviour {
         if (Player == null) {
             Player = FindObjectOfType<PlayerManager>();
         }
-        //public void changeScene() {
-        //    SceneManager.LoadScene(scenemanager);
-        }
     }
+    public void ChangeScene() {
+        SceneManager.LoadScene(sceneManager);
+    }
+}
 
