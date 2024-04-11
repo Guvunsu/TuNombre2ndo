@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         } else {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
 
     }
@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour {
         if (Player == null) {
             Player = FindObjectOfType<PlayerManager>();
         }
-        public void changeScene() {
-            SceneManager.LoadScene(scenemanager);
+        //public void changeScene() {
+        //    SceneManager.LoadScene(scenemanager);
         }
     }
-}
+

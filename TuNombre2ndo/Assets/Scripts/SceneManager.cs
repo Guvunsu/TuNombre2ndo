@@ -22,9 +22,9 @@ public class SceneManager : MonoBehaviour {
         }
     }
 
-    public void LoadScene(string sceneName) {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    //public void LoadScene(string sceneName) {
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    //}
 
 
 
