@@ -28,8 +28,8 @@ public class PatronEnemy : MonoBehaviour {
     private Transform currentPoint;
 
 
-    public float speed;
-    // Start is called before the first frame update
+    public float speed = 2.0f;
+
     void Start() {
         Rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -40,6 +40,28 @@ public class PatronEnemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        moveEnemy();
+    }
+    private void OnCollisionEnter2D(Collision2D collision) {
+        dt = Time.deltaTime;
+        //if (movEnemy )
+        if (collision.gameObject.CompareTag("Player")) {
+            // GameObject.Instantiate.GetComponent<PoinstManager>();
+            gameObject.GetComponent<PoinstManager>();//a ver si funciona esto 
+            Debug.Log("El jugador si me esta tocando");
+        }
+        {
+            if (collision.gameObject.CompareTag("Tilemap")) {
+                movEnemy = new Vector2(speed, 1);
+                moveEnemy();
+                flip();
+
+            }
+
+
+        }
+    }
+    private void moveEnemy() {
         Point = currentPoint.position - transform.position;
         if (currentPoint == PointB.transform) {
             Rb.velocity = new Vector2(speed, 0);
@@ -51,7 +73,7 @@ public class PatronEnemy : MonoBehaviour {
             currentPoint = PointA.transform;
         }
 
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == PointA.transform) {
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.1f && currentPoint == PointA.transform) {
             flip();
             currentPoint = PointB.transform;
         }
@@ -64,22 +86,6 @@ public class PatronEnemy : MonoBehaviour {
             animator.SetBool("Walking", true);
         }
 
-    }
-    private void OnCollisionEnter2D(Collision2D collision) {
-        dt = Time.deltaTime;
-        //if (movEnemy )
-        if (collision.gameObject.tag == "Player") {
-            Debug.Log("El jugador si me esta tocando");
-        }
-        {
-            if (collision.gameObject.tag == "Tilemap") {
-                movEnemy = new Vector2(speed, 1);
-                flip();
-            }
-        }
-        {
-
-        }
     }
     private void flip() {
         localScale = transform.localScale;

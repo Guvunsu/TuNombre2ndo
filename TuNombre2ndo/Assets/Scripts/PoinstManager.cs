@@ -7,6 +7,7 @@ public class PoinstManager : MonoBehaviour {
     public static PoinstManager Instance;
 
     int points = 0;
+    
 
     // codigo para mi singleton 
     private void Awake() {
@@ -21,6 +22,7 @@ public class PoinstManager : MonoBehaviour {
     }
 
     public void addPoints(int pointsToAdd) {
+        points=points+1;
         points += pointsToAdd;
         Debug.Log(points);
     }
