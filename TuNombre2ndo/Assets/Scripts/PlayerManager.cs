@@ -23,12 +23,12 @@ public class PlayerManager : MonoBehaviour {
         if (collision.gameObject.tag == ("Win")) {
             Debug.Log("Ganaste");
 
-            if (collision.gameObject.tag == ("Enemy")) {
-                isAlive = true;
-                Debug.Log("Lo Toque");
-            } else {
-                Destroy(collision.gameObject);
-            }
+        }
+        if (collision.gameObject.tag == ("Enemy")) {
+            isAlive = true;
+            Destroy(collision.gameObject);
+            Debug.Log("Lo Toque");
+        } else {
         }
     }
     private void OnCollisionExit2D(Collision2D collision) {
@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void PlayerLose() {
         movPlayer.DisableMovement();
-       
+
     }
 
     public void RestartPoint() {

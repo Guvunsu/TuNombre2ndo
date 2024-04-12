@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void ChangeScene() {
-        SceneManager.LoadScene(sceneManager);
+        SceneManager.instance.LoadScene(sceneManager);
     }
 }
 

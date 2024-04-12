@@ -15,23 +15,24 @@ public class SceneManager : MonoBehaviour {
                 // busca y selecciona scenemanager
                 DontDestroyOnLoad(gameObject);
                 //no destruye un permanente objetivo gameobject cuando carga la escena
-            }
-            else {
+            } else {
                 Destroy(gameObject);
             }
         }
     }
 
-    //public void LoadScene(string sceneName) {
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //}
-
-
-
-
-
-
-    //public void NextLevel() {
-    //    SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-    //}
+    public void LoadScene(string sceneName) {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
 }
+
+
+
+
+
+
+
+//public void NextLevel() {
+//    SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+//}
+
