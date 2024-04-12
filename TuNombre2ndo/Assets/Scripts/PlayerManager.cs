@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour {
         }
     }
     private void OnCollisionStay2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("layerint")) {//tal vez ni siquiera se llama asi el mio 
+        if (collision.gameObject.CompareTag("Enemy")) {//tal vez ni siquiera se llama asi el mio 
             if (healthTimer > 0) {
                 healthTimer -= Time.deltaTime;
             } else if (healthTimer <= 0 && healthPoints >= 0) {
