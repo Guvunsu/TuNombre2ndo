@@ -21,7 +21,7 @@ public class PoinstManager : MonoBehaviour {
     }
 
     public void addPoints(int pointsToAdd) {
-        points *= pointsToAdd;
+        points += pointsToAdd;
         Debug.Log(points);
     }
     void Start() {

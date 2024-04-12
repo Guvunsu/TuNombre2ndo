@@ -67,7 +67,7 @@ public class PlayerManager : MonoBehaviour {
         movPlayer.EnableMovement();
     }
     //public void LoadScene() {
-    //    SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+    // UnityEngine.SceneManager.instance.LoadScene("Menu", LoadSceneMode.Additive);
     //}
     void Start() {
 
