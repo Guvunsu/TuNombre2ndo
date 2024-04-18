@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour {
 
 
     public static GameManager Instance;
+
     public PlayerManager Player;
-    public string sceneManager;
     public GameObject losePanel;
+
+    public string sceneManager;
 
     private void Awake() {
         if (Instance != null && Instance != this) {
@@ -37,8 +39,12 @@ public class GameManager : MonoBehaviour {
             Player = FindObjectOfType<PlayerManager>();
         }
     }
-    public void ChangeScene() {
+
+    public void sceneSwitch() { // tal vez ponerle un string sceneName, al igual que abajo
         SceneManager.instance.LoadScene(sceneManager);
     }
+
+
+
 }
 

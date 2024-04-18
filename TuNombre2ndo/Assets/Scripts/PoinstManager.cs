@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PoinstManager : MonoBehaviour {
     //Mi singleton
     public static PoinstManager Instance;
 
-    int points = 1;
+    int points;
+    public Text puntuacionNumber;
     
 
     // codigo para mi singleton 
@@ -20,14 +22,18 @@ public class PoinstManager : MonoBehaviour {
             Instance = this;
         }
     }
-
+    public void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("Lo Hemos Logrado");
+        points++;
+        Destroy(collision.gameObject);//tal vez le ponga mejor el (this)
+    }
     public void addPoints(int pointsToAdd) {
        points++;
         points += pointsToAdd;
         Debug.Log(points);
     }
     void Start() {
-
+        points = 0;
     }
 
     // Update is called once per frame
