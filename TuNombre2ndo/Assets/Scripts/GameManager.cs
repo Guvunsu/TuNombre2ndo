@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
 
 
     void Update() {
-        if (!Player.isAlive) {
+        if (!Player.isAlive && !losePanelIsOpen) {
             gameObject.SetActive(true);
             Debug.Log("GameOver");
         }
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void sceneSwitch(string sceneName) { // tal vez ponerle un string sceneName, al igual que abajo
+    public void sceneSwitch(string sceneName) {
         SceneManager.instance.LoadScene(sceneName);
         losePanelIsOpen = false;
     }
