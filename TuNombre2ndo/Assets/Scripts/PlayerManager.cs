@@ -3,25 +3,30 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour {
 
     private MovementPlayer movPlayer;
+    private Animator animator;
+
+    public List<Sprite> heartsSprite;//jalarlso desde la carpeta de sprites
+    public List<GameObject> heartsUI;//aqui jalo desde mis objetos de mi jerarquia
+
     [SerializeField]
     private float healthTimer = 0.5f;
     [SerializeField]
     private SpriteRenderer sprite;
     [SerializeField]
-    private int healthPoints = 3;
+    private int lives = 3;
     [SerializeField]
     private int layerint;
     [SerializeField]
     private Transform respawnPoints;
-    public bool isAlive = true;
-
-    private Animator animator;
     [SerializeField]
     private GameObject[] hearts;
+
+    public bool isAlive = true;
     public string sceneManager;
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -45,12 +50,12 @@ public class PlayerManager : MonoBehaviour {
         if (collision.gameObject.CompareTag("Enemy")) {//tal vez ni siquiera se llama asi el mio 
             if (healthTimer > 0) {
                 healthTimer -= Time.deltaTime;
-            } else if (healthTimer <= 0 && healthPoints >= 0) {
-                healthPoints--;
+            } else if (healthTimer <= 0 && lives >= 0) {
+                lives--;
                 sprite.color = Color.blue;
-                if (healthPoints > 0) {
+                if (lives > 0) {
                     RestartPoint();
-                } else if (healthPoints < 0) {
+                } else if (lives < 0) {
                     isAlive = false;
                     PlayerLose();
                 }
@@ -60,20 +65,24 @@ public class PlayerManager : MonoBehaviour {
     }
     public void lifeHeart() {
         //tengo 3 corazones , implemente un array para bajarme un corazon por cada daño que me hagan
-        if (healthPoints < 1) {
+        if (lives < 1) {
             Destroy(hearts[0].gameObject);
             animator.Play("hurt");
             SceneManager.instance.LoadScene(sceneManager);
-        } else if (healthPoints < 2) {
+        } else if (lives < 2) {
             Destroy(hearts[1].gameObject);
             animator.Play("hurt");
-        } else if (healthPoints < 3) {
+        } else if (lives < 3) {
             Destroy(hearts[2].gameObject);
             animator.Play("hurt");
+        } else if (lives < 4) {
+            Destroy(hearts[3].gameObject);
+            animator.Play("hurt");
         }
+
     }
     public void arraylifeDamage() {
-        healthPoints--;
+        lives--;
         lifeHeart();
     }
     public void PlayerLose() {
@@ -84,15 +93,45 @@ public class PlayerManager : MonoBehaviour {
     public void RestartPoint() {
         gameObject.transform.position = respawnPoints.position;
         sprite.color = Color.green;
-        healthPoints = 3;
+        lives = 3;
 
         movPlayer.EnableMovement();
+    }
+    private void changeHeartsSprite() {
+        switch (lives) {
+            case 5:
+                heartsUI[0].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
+                break;
+
+            case 4:
+                heartsUI[0].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
+                break;
+
+            case 3:
+                heartsUI[1].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
+                break;
+
+            case 2:
+                heartsUI[1].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
+                break;
+
+            case 1:
+                heartsUI[2].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
+                break;
+
+            case 0:
+                heartsUI[2].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
+                break;
+
+            default:
+                break;
+        }
     }
     //public void LoadScene() {
     //    UnityEngine.SceneManager.instance.LoadScene("Menu", LoadSceneMode.Additive);
     //}
     void Start() {
-        healthPoints = hearts.Length;
+        lives = hearts.Length;
     }
 
 

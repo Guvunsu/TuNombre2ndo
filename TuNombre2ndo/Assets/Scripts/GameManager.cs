@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     public GameObject losePanel;
 
     public string sceneManager;
+    public bool losePanelIsOpen = true;
 
     private void Awake() {
         if (Instance != null && Instance != this) {
@@ -40,8 +41,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void sceneSwitch() { // tal vez ponerle un string sceneName, al igual que abajo
-        SceneManager.instance.LoadScene(sceneManager);
+    public void sceneSwitch(string sceneName) { // tal vez ponerle un string sceneName, al igual que abajo
+        SceneManager.instance.LoadScene(sceneName);
+        losePanelIsOpen = false;
     }
 
 

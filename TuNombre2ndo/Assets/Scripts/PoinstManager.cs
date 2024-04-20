@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PoinstManager : MonoBehaviour {
     //Mi singleton
     public static PoinstManager Instance;
 
-    int points;
-    public Text puntuacionNumber;
-    
+    [SerializeField] private TextMeshProUGUI textoUGUI;
 
+    public Text puntuacionNumber;
+
+    int points;
     // codigo para mi singleton 
     private void Awake() {
         //si hay una Instancia de mis pointsmanager , destruyeme si no lo soy 
@@ -28,7 +30,7 @@ public class PoinstManager : MonoBehaviour {
         Destroy(collision.gameObject);//tal vez le ponga mejor el (this)
     }
     public void addPoints(int pointsToAdd) {
-       points++;
+        points++;
         points += pointsToAdd;
         Debug.Log(points);
     }
@@ -38,6 +40,6 @@ public class PoinstManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        textoUGUI.text = ToString();
     }
 }
