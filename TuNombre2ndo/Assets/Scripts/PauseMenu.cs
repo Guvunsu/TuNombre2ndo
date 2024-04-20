@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour {
         panel.SetActive(false);
     }
 
-    public void Reset() {
+    public void Reiniciar() {
         Time.timeScale = 1;
         GameManager.Instance.sceneSwitch("Gameplay");
     }

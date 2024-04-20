@@ -645,8 +645,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1924368022}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 1
+        m_MethodName: sceneSwitch
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -999,8 +999,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  losePanel: {fileID: 3210001774160958966, guid: b01169022a0e88643a3b75ba826922d2, type: 3}
   sceneManager: Gameplay
-  losePanel: {fileID: 1199857684}
+  losePanelIsOpen: 0
 --- !u!4 &1924368023
 Transform:
   m_ObjectHideFlags: 0
