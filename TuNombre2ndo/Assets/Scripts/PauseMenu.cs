@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
 
-    public GameObject panel;
+    public GameObject panel;// ponerlo en donde dice su nombre  
 
     public bool gameIsPaused;
 
