@@ -5,7 +5,8 @@ using UnityEditor;
 using UnityEngine.SceneManagement;// aguregue este para el load
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
 
     public static GameManager Instance;
@@ -16,32 +17,41 @@ public class GameManager : MonoBehaviour {
     public string sceneManager;
     public bool losePanelIsOpen = true;
 
-    private void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(this);
-            Destroy(gameObject);
-        } else {
+    private void Awake()
+    {
+        if (Instance == null)
+        {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+
         }
+        else
+        {
+            Destroy(this);
+        }
+        DontDestroyOnLoad(this.gameObject);
 
     }
-    void Start() {
+    void Start()
+    {
 
     }
 
 
-    void Update() {
-        if (!Player.isAlive && !losePanelIsOpen) {
+    void Update()
+    {
+        if (!Player.isAlive && !losePanelIsOpen)
+        {
             gameObject.SetActive(true);
             Debug.Log("GameOver");
         }
-        if (Player == null) {
+        if (Player == null)
+        {
             Player = FindObjectOfType<PlayerManager>();
         }
     }
 
-    public void sceneSwitch(string sceneName) {
+    public void sceneSwitch(string sceneName)
+    {
         SceneManager.instance.LoadScene(sceneName);
         losePanelIsOpen = false;
     }
