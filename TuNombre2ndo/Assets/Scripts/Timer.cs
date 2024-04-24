@@ -6,9 +6,10 @@ using UnityEditor;
 using UnityEngine;
 using TMPro;
 
-public class Timer : MonoBehaviour {
+public class Timer : MonoBehaviour
+{
 
-    [SerializeField] TextMeshPro textTime;
+    [SerializeField] private TextMeshProUGUI textoUGUI;
 
     //variables para que funcione el timer 
     private float timerTotal = 90f;
@@ -20,21 +21,32 @@ public class Timer : MonoBehaviour {
     string timerString;
 
 
-    void Start() {
+    void Start()
+    {
 
     }
-    void Update() {
-        timer();
+    void Update()
+    {
+        // timer();
+        if (timerTotal > 0 && !timerUp)
+        {
+            timerTotal -= Time.deltaTime;
+        }
+        else timerUp = true;
+
+        textoUGUI.text = timeFormat();
     }
 
-    public bool TimerUp {
+    public bool TimerUp
+    {
         // regresa un valor que esta afuera del script
         get => TimerUp;
         //establece un nuevo valor en una variable
         set => TimerUp = value;
     }
 
-    private string timeFormat() {
+    private string timeFormat()
+    {
         minutes = Mathf.FloorToInt(timerTotal / 60f);
         seconds = Mathf.FloorToInt(timerTotal - minutes * 60f);
 
@@ -43,16 +55,17 @@ public class Timer : MonoBehaviour {
     }
 
     //timer
-    public void timer() {
-        if (timerTotal > 0 && !timerUp) {
-            timerTotal -= Time.deltaTime;
-        } else timerUp = true;
+    //public void timer() {
+    //    if (timerTotal > 0 && !timerUp) {
+    //        timerTotal -= Time.deltaTime;
+    //    } else timerUp = true;
 
-        textTime.text = timeFormat();
-    }
+    //    textTime.text = timeFormat();
+    //}
 
     //para resetear el timer
-    public float ReturnTimer() {
+    public float ReturnTimer()
+    {
         return timerTotal;
     }
     //para colocar o no el timer 
