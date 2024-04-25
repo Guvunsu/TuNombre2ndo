@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject losePanel;
 
-    public string sceneManager;
     public bool losePanelIsOpen = true;
-    private bool isGameLose = false;
+
     public bool isGameWin = false;
+    private bool isGameLose = false;
+
 
    public bool IsGameWin
     {
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
 
         }
     private void Awake()
-    {
+    {// agregue esto con Carpi
         if (Instance == null)
         {
             Instance = this;
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     public void sceneSwitch(string sceneName)
     {//borrar mi scenemanager y usar el using 
-        scenema.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
         losePanelIsOpen = false;
     }
 

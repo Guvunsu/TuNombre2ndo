@@ -51,18 +51,18 @@ TagManager:
   - name: BackGround
     uniqueID: 951838253
     locked: 0
-  - name: Plataforma
-    uniqueID: 2694558369
-    locked: 0
   - name: tilemap
     uniqueID: 3336023115
     locked: 0
-  - name: Ui
-    uniqueID: 1105368351
+  - name: Plataforma
+    uniqueID: 2694558369
+    locked: 0
+  - name: Enemy
+    uniqueID: 3472445073
     locked: 0
   - name: caracter
     uniqueID: 1483394087
     locked: 0
-  - name: Enemy
-    uniqueID: 3472445073
+  - name: Ui
+    uniqueID: 1105368351
     locked: 0

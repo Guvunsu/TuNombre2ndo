@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class PoinstManager : MonoBehaviour {
     //Mi singleton
@@ -40,4 +41,5 @@ public class PoinstManager : MonoBehaviour {
     void Update() {
         textoUGUI.text = ToString();
     }
+   
 }
