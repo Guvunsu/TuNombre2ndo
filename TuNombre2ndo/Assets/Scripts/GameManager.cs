@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void sceneSwitch(string sceneName)
-    {
-        SceneManager.instance.LoadScene(sceneName);
+    {//borrar mi scenemanager y usar el using 
+        scenema.LoadScene(sceneName);
         losePanelIsOpen = false;
     }
 

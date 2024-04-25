@@ -63,3 +63,6 @@ TagManager:
   - name: caracter
     uniqueID: 1483394087
     locked: 0
+  - name: Enemy
+    uniqueID: 3472445073
+    locked: 0

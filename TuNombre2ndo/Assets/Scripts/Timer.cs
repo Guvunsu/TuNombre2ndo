@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
     string timerString;
 
 
-    void Start()
+    void Awake()
     {
 
     }
