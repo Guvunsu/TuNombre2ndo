@@ -3,47 +3,59 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class PauseMenu : MonoBehaviour {
+public class PauseMenu : MonoBehaviour
+{
 
     public GameObject panel;// ponerlo en donde dice su nombre  
 
     public bool gameIsPaused;
 
-    void Start() {
+    void Start()
+    {
 
     }
 
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isGameWin && GameManager.Instance.IsGameLose == false)
+        {
             gameIsPaused = !gameIsPaused;
             pauseGame();
         }
     }
-    public void pauseGame() {
-        if (gameIsPaused) {
+    public void pauseGame()
+    {
+        if (gameIsPaused)
+        {
             Time.timeScale = 0f;
             panel.SetActive(true);
-        } else {
+        }
+        else
+        {
             resumeGame();
         }
     }
-    public void resumeGame() {
+    public void resumeGame()
+    {
         Time.timeScale = 1;
         panel.SetActive(false);
     }
 
-    public void Reiniciar() {
+    public void Reiniciar()
+    {
         Time.timeScale = 1;
         GameManager.Instance.sceneSwitch("Gameplay");
     }
 
-    public void returnMainMenu() {
+    public void returnMainMenu()
+    {
         Time.timeScale = 1;
         GameManager.Instance.sceneSwitch("Menu");
     }
 
-    public void exitGame() {
+    public void exitGame()
+    {
         Application.Quit();
     }
 }

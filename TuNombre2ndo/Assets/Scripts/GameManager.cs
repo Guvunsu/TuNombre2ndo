@@ -11,12 +11,26 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    public PlayerManager Player;
     public GameObject losePanel;
 
     public string sceneManager;
     public bool losePanelIsOpen = true;
+    private bool isGameLose = false;
+    public bool isGameWin = false;
 
+   public bool IsGameWin
+    {
+        get => isGameWin;
+        set=>isGameWin = value;
+        } 
+
+         public bool IsGameLose
+    {
+        get => IsGameLose;
+       set => isGameLose=value;
+        
+
+        }
     private void Awake()
     {
         if (Instance == null)
@@ -39,15 +53,17 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!Player.isAlive && !losePanelIsOpen)
+        if (isGameLose && !losePanelIsOpen)
         {
-            gameObject.SetActive(true);
-            Debug.Log("GameOver");
+            Instantiate(losePanel);
+            losePanelIsOpen = true; 
+            //gameObject.SetActive(true);
+            //Debug.Log("GameOver");
         }
-        if (Player == null)
-        {
-            Player = FindObjectOfType<PlayerManager>();
-        }
+        //if (Player == null)
+        //{
+        //    Player = FindObjectOfType<PlayerManager>();
+        //}
     }
 
     public void sceneSwitch(string sceneName)

@@ -10,8 +10,6 @@ public class PoinstManager : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI textoUGUI;
 
-    public Text puntuacionNumber;
-
     int points;
     // codigo para mi singleton 
     private void Awake() {
