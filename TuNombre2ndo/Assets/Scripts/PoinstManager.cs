@@ -39,7 +39,7 @@ public class PoinstManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        textoUGUI.text = ToString();
+        textoUGUI.text = points.ToString();
     }
    
 }
