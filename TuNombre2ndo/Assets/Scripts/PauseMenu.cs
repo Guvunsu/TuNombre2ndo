@@ -10,6 +10,10 @@ public class PauseMenu : MonoBehaviour
 
     public bool gameIsPaused;
 
+    public void Reset()
+    {
+        
+    }
     void Start()
     {
 

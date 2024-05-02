@@ -14,24 +14,25 @@ public class GameManager : MonoBehaviour
     public GameObject losePanel;
 
     public bool losePanelIsOpen = true;
+    public bool winPanelIsOpen = true;
 
     public bool isGameWin = false;
     private bool isGameLose = false;
 
 
-   public bool IsGameWin
+    public bool IsGameWin
     {
         get => isGameWin;
-        set=>isGameWin = value;
-        } 
+        set => isGameWin = value;
+    }
 
-         public bool IsGameLose
+    public bool IsGameLose
     {
         get => IsGameLose;
-       set => isGameLose=value;
-        
+        set => isGameLose = value;
 
-        }
+
+    }
     private void Awake()
     {// agregue esto con Carpi
         if (Instance == null)
@@ -48,7 +49,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-
+        losePanelIsOpen = false;
+        isGameWin = false;
     }
 
 
@@ -57,7 +59,7 @@ public class GameManager : MonoBehaviour
         if (isGameLose && !losePanelIsOpen)
         {
             Instantiate(losePanel);
-            losePanelIsOpen = true; 
+            losePanelIsOpen = true;
             //gameObject.SetActive(true);
             //Debug.Log("GameOver");
         }
@@ -69,8 +71,11 @@ public class GameManager : MonoBehaviour
 
     public void sceneSwitch(string sceneName)
     {//borrar mi scenemanager y usar el using 
-        SceneManager.LoadScene(sceneName);
         losePanelIsOpen = false;
+        winPanelIsOpen = false;
+        isGameWin = false;
+        isGameLose = false;
+        SceneManager.LoadScene(sceneName);
     }
 
 

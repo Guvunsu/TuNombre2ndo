@@ -8,11 +8,10 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-
+    [SerializeField] private float timerTotal = 90;
     [SerializeField] private TextMeshProUGUI textoUGUI;
 
     //variables para que funcione el timer 
-    private float timerTotal = 90f;
     private bool timerUp = false;
 
     //variables primitivas (para el GUI)
@@ -33,6 +32,11 @@ public class Timer : MonoBehaviour
             timerTotal -= Time.deltaTime;
         }
         else timerUp = true;
+        timerTotal = 0;
+        if (TimerUp)
+        {
+            GameManager.Instance.IsGameLose = true;
+        }
 
         textoUGUI.text = timeFormat();
     }

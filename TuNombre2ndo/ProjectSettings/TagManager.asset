@@ -11,6 +11,7 @@ TagManager:
   - ConfidentLimits
   - Enemy
   - UI
+  - Coins
   layers:
   - Default
   - TransparentFX
@@ -20,11 +21,11 @@ TagManager:
   - UI
   - Plataforma
   - Tilemap
+  - Coins
   - ZonaDeMuerte
   - Caracter
   - VC
   - Enemy
-  - Coins
   - 
   - 
   - 
@@ -56,6 +57,9 @@ TagManager:
     locked: 0
   - name: Plataforma
     uniqueID: 2694558369
+    locked: 0
+  - name: Coins
+    uniqueID: 872839205
     locked: 0
   - name: Enemy
     uniqueID: 3472445073
