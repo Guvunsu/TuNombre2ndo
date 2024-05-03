@@ -34,13 +34,13 @@ public class PlayerManager : MonoBehaviour
     public bool isAlive = true;
     public string sceneManager;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //agregar una key en el juego
     {
-        if (collision.gameObject.CompareTag("Key"))
-        {
-            key = true;
-            collision.gameObject.transform.parent = gameObject.transform;
-        }
+        //if (collision.gameObject.CompareTag("Key"))
+        //{
+        //    key = true;
+        //    collision.gameObject.transform.parent = gameObject.transform;
+        //}
         if (collision.gameObject.CompareTag("Win") && key)
         {//o ponle .tag ==
             timerPoints = (int)timerLevel.ReturnTimer();
