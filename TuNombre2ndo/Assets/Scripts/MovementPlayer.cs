@@ -9,7 +9,8 @@ public class MovementPlayer : MonoBehaviour
     private float MoveSpeed = 700;
     public float JumpForce;
     int Jumps = 0;
-   //bool TocoSuelo;
+    public float gravity;
+    //bool TocoSuelo;
 
     //cosas de FixedUpdate Fisicas 
 
@@ -25,6 +26,7 @@ public class MovementPlayer : MonoBehaviour
     private Rigidbody2D rbPlayer;
     private Animator animator;
     private BoxCollider2D boxCollider;
+
 
 
     void Start()
@@ -70,7 +72,7 @@ public class MovementPlayer : MonoBehaviour
             Sprite.flipX = true;
             animator.SetBool("Walking", true);
         }
-        else animator.SetBool("IDLE", false);
+        else animator.SetBool("IDLE", true);
 
     }
     private void Jump()
@@ -83,11 +85,11 @@ public class MovementPlayer : MonoBehaviour
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
             Jumps++;
             animator.SetBool("Jumping", true);
-            animator.SetBool("fall", false);
+            animator.SetBool("fall", true);
             // if (!TocoSuelo)
             // {
-            animator.SetBool("Jumping", false);
-            animator.SetBool("fall", true);
+            //animator.SetBool("Jumping", false);
+            //animator.SetBool("fall", false);
             // }
 
         }
@@ -114,7 +116,7 @@ public class MovementPlayer : MonoBehaviour
 
         Movimiento();
         Jump();
-
+        Physics2D.gravity = gravity * Vector2.up;
 
     }
 
