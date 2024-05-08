@@ -1,0 +1,181 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public class MovementPlayer : MonoBehaviour {
+    // variables generales del script
+
+    private float MoveSpeed = 700;
+    public float JumpForce;
+    int Jumps = 0;
+    // cosas que vi con Hugo
+    private bool isWalking, isGrounded;
+    private float normalSpeed, speedIncrement;
+
+    //cosas de FixedUpdate Fisicas 
+
+    private Vector2 Move;
+    private float dt;
+    private float HiInput;
+    float verticalInput;
+    float horizontalInput;
+
+
+    // llamados de libreria 
+
+    [SerializeField]
+    private SpriteRenderer Sprite;
+    private Rigidbody2D rbPlayer;
+    private Animator animator;
+    private BoxCollider2D boxCollider;
+
+
+    void Start() {
+        // getcomponents abajo
+
+        Sprite = gameObject.GetComponent<SpriteRenderer>();
+
+        rbPlayer = gameObject.GetComponent<Rigidbody2D>();
+
+        boxCollider = GetComponent<BoxCollider2D>();
+
+        animator = GetComponent<Animator>();
+
+    }
+    private void Movimiento() {
+
+        // sprint paramovimeinto normal y acelerado 
+
+        //if (Input.GetKey(KeyCode.LeftShift)) {
+        //    MoveSpeed = 1400;
+        //    animator.SetBool("Runing", true);
+        //} else {
+        //    MoveSpeed = 700;
+        //    animator.SetBool("Runing", false);
+        //}
+
+
+        //// voltear sprite
+
+        //if (Move.x > 0) {
+        //    Sprite.flipX = false;
+        //    animator.SetBool("Walking", true);
+
+        //} else if (Move.x < 0) {
+        //    Sprite.flipX = true;
+        //    animator.SetBool("Walking", true);
+        //} else animator.SetBool("IDLE", false);
+
+
+        // cosas que vi con Hugo
+
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            speedIncrement = 2.5f;
+        } else {
+            speedIncrement = 0;
+        }
+
+
+        if (HiInput > 0) {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+        if (HiInput < 0) {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+    }
+    private void Jump() {
+        // salto
+
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2 && isGrounded) {
+
+            GetComponent<Rigidbody2D>().AddForce(JumpForce * Vector2.up, ForceMode2D.Impulse);
+
+            //rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
+            Jumps++;
+
+            //cosas que vi con Hugo 
+
+            animator.SetBool("isGrounded", isGrounded);
+            animator.SetBool("isWalking", isWalking);
+
+            //animator.SetBool("Jumping", true);
+            //animator.SetBool("fall", false);
+
+
+            //animator.SetBool("Jumping", false);
+            //animator.SetBool("fall", true);
+
+
+        }
+
+
+    }
+
+    private void FixedUpdate() {
+
+        // definicion de varialbles
+
+        //HiInput = Input.GetAxisRaw("Horizontal");
+
+        //dt = Time.deltaTime;
+        //Move = new Vector2(HiInput * MoveSpeed * dt, rbPlayer.velocity.y);
+        //rbPlayer.velocity = Move;
+
+
+        //lo que me ayudo Hugo
+        HiInput = Input.GetAxis("Horizontal");
+
+        verticalInput = GetComponent<Rigidbody2D>().velocity.y;
+        horizontalInput = (normalSpeed + speedIncrement) * HiInput;
+
+        GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalInput, verticalInput);
+
+        if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > 0.1f) {
+            isWalking = true;
+        } else {
+            isWalking = false;
+        }
+    }
+
+    void Update() {
+
+        Movimiento();
+        Jump();
+
+
+    }
+
+    public void DisableMovement() {
+        MoveSpeed = 0;
+        JumpForce = 0;
+    }
+    public void EnableMovement() {
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+
+        //    // resetear salto
+
+        if (collision.collider.CompareTag("Tilemap")) {
+
+            //        // esto es para que el salto solo se resetee cuando toca el suelo, y no una pared, techo etc...
+            //        // Aquí se utiliza un condicional para verificar el ángulo entre la normal de la colisión y el vector hacia arriba (Vector2.up).
+            //        // La normal es un vector perpendicular a la superficie de colisión. 
+            //        // Este condicional verifica si el ángulo entre la normal y el vector hacia arriba es menor a 45 grados.
+            //        // conseguido de stack overflow de usuario "Voidsay"
+
+            if (Vector2.Angle(collision.GetContact(0).normal, Vector2.up) < 45) {
+                Jumps = 0;
+                //animator.SetBool("Jumping", false);
+                animator.SetTrigger("Jumping");//lo agrege por Hugo
+            }
+
+        }
+
+
+    }
+}

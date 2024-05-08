@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementPlayer : MonoBehaviour
-{
+public class MovementPlayer : MonoBehaviour {
     // variables generales del script
 
     private float MoveSpeed = 700;
     public float JumpForce;
     int Jumps = 0;
+    private bool isGrounded;
     public float gravity;
     //bool TocoSuelo;
 
@@ -29,8 +29,7 @@ public class MovementPlayer : MonoBehaviour
 
 
 
-    void Start()
-    {
+    void Start() {
         // getcomponents abajo
 
         Sprite = gameObject.GetComponent<SpriteRenderer>();
@@ -42,18 +41,14 @@ public class MovementPlayer : MonoBehaviour
         animator = GetComponent<Animator>();
 
     }
-    private void Movimiento()
-    {
+    private void Movimiento() {
 
         // sprint paramovimeinto normal y acelerado 
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
+        if (Input.GetKey(KeyCode.LeftShift)) {
             MoveSpeed = 1400;
             animator.SetBool("Runing", true);
-        }
-        else
-        {
+        } else {
             MoveSpeed = 700;
             animator.SetBool("Runing", false);
         }
@@ -61,30 +56,26 @@ public class MovementPlayer : MonoBehaviour
 
         // voltear sprite
 
-        if (Move.x > 0)
-        {
+        if (Move.x > 0) {
             Sprite.flipX = false;
             animator.SetBool("Walking", true);
 
-        }
-        else if (Move.x < 0)
-        {
+        }//le quite el if else a la siguiente 
+        if (Move.x < 0) {
             Sprite.flipX = true;
             animator.SetBool("Walking", true);
-        }
-        else animator.SetBool("IDLE", true);
+        } else animator.SetBool("IDLE", true);
 
     }
-    private void Jump()
-    {
+    private void Jump() {
         // salto
 
-        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2)
-        {
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2 /*&& isGrounded*/) {
 
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
             Jumps++;
             animator.SetBool("Jumping", true);
+            // animator.SetBool("isGrounded", isGrounded);//agrege esto graias por Hugo 
             animator.SetBool("fall", true);
             // if (!TocoSuelo)
             // {
@@ -97,8 +88,7 @@ public class MovementPlayer : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
 
         // definicion de varialbles
 
@@ -111,8 +101,7 @@ public class MovementPlayer : MonoBehaviour
 
     }
 
-    void Update()
-    {
+    void Update() {
 
         Movimiento();
         Jump();
@@ -120,23 +109,19 @@ public class MovementPlayer : MonoBehaviour
 
     }
 
-    public void DisableMovement()
-    {
+    public void DisableMovement() {
         MoveSpeed = 0;
         JumpForce = 0;
     }
-    public void EnableMovement()
-    {
+    public void EnableMovement() {
 
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
+    void OnCollisionEnter2D(Collision2D collision) {
 
         //    // resetear salto
 
-        if (collision.collider.CompareTag("Tilemap"))
-        {
+        if (collision.collider.CompareTag("Tilemap")) {
 
             //        // esto es para que el salto solo se resetee cuando toca el suelo, y no una pared, techo etc...
             //        // Aquí se utiliza un condicional para verificar el ángulo entre la normal de la colisión y el vector hacia arriba (Vector2.up).
@@ -144,8 +129,7 @@ public class MovementPlayer : MonoBehaviour
             //        // Este condicional verifica si el ángulo entre la normal y el vector hacia arriba es menor a 45 grados.
             //        // conseguido de stack overflow de usuario "Voidsay"
 
-            if (Vector2.Angle(collision.GetContact(0).normal, Vector2.up) < 45)
-            {
+            if (Vector2.Angle(collision.GetContact(0).normal, Vector2.up) < 45) {
                 Jumps = 0;
                 animator.SetBool("Jumping", false);
 

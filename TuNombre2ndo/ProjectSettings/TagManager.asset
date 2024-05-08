@@ -55,6 +55,9 @@ TagManager:
   - name: tilemap
     uniqueID: 3336023115
     locked: 0
+  - name: ZonaDeMuerte
+    uniqueID: 1511301973
+    locked: 0
   - name: Plataforma
     uniqueID: 2694558369
     locked: 0
