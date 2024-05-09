@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
 
     public GameObject panel;// ponerlo en donde dice su nombre  
-
+    
     public bool gameIsPaused;
 
     public void Reset()
@@ -34,6 +34,7 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 0f;
             panel.SetActive(true);
+           
         }
         else
         {

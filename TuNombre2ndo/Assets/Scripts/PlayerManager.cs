@@ -11,22 +11,18 @@ public class PlayerManager : MonoBehaviour
     private MovementPlayer movPlayer;
     private Animator animator;
     public Timer timerLevel;
+    public AudioSource audio;
 
+    public List<AudioClip> clips;
     public List<Sprite> heartsSprite;//jalarlso desde la carpeta de sprites
     public List<GameObject> heartsUI;//aqui jalo desde mis objetos de mi jerarquia
 
-    [SerializeField]
-    private float healthTimer = 0.1f;
-    [SerializeField]
-    private SpriteRenderer sprite;
-    [SerializeField]
-    private int lives = 3;
-    [SerializeField]
-    private int layerint;
-    [SerializeField]
-    private Transform respawnPoints;
-    [SerializeField]
-    private GameObject[] hearts;
+    [SerializeField] private float healthTimer = 0.1f;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private int lives = 3;
+    [SerializeField] private int layerint;
+    [SerializeField] private Transform respawnPoints;
+    [SerializeField] private GameObject[] hearts;
 
     bool key = false;
     int timerPoints;
@@ -36,11 +32,13 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //agregar una key en el juego
     {
-        //if (collision.gameObject.CompareTag("Key"))
-        //{
-        //    key = true;
-        //    collision.gameObject.transform.parent = gameObject.transform;
-        //}
+        if (collision.gameObject.CompareTag("Key"))
+        {
+            audio.clip = clips[0];
+            audio.Play();
+            key = true;
+            collision.gameObject.transform.parent = gameObject.transform;
+        }
         if (collision.gameObject.CompareTag("Win") && key)
         {//o ponle .tag ==
             timerPoints = (int)timerLevel.ReturnTimer();
@@ -99,17 +97,20 @@ public class PlayerManager : MonoBehaviour
         //tengo 3 corazones , implemente un array para bajarme un corazon por cada daño que me hagan
         if (lives < 4)
         {
+            arraylifeDamage();
             Destroy(hearts[2].gameObject);
             animator.Play("hurt");
 
         }
         if (lives < 3)
         {
+            arraylifeDamage();
             Destroy(hearts[1].gameObject);
             animator.Play("hurt");
         }
         if (lives < 2)
         {
+            arraylifeDamage();
             Destroy(hearts[0].gameObject);
             animator.Play("hurt");
             //} else if (lives < 1) {
@@ -118,11 +119,11 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
-    //public void arraylifeDamage()
-    //{
-    //    lives--;
-    //    lifeHeart();
-    //}
+    public void arraylifeDamage()
+    {
+        lives--;
+        lifeHeart();
+    }
     public void PlayerLose()
     {
         movPlayer.DisableMovement();
@@ -138,38 +139,38 @@ public class PlayerManager : MonoBehaviour
 
         movPlayer.EnableMovement();
     }
-    //private void changeHeartsSprite()
-    //{
-    //    switch (lives)
-    //    {
-    //        case 5:
-    //            heartsUI[0].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
-    //            break;
+    private void changeHeartsSprite()
+    {
+        switch (lives)
+        {
+            case 5:
+                heartsUI[0].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
+                break;
 
-    //        case 4:
-    //            heartsUI[0].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
-    //            break;
+            case 4:
+                heartsUI[0].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
+                break;
 
-    //        case 3:
-    //            heartsUI[1].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
-    //            break;
+            case 3:
+                heartsUI[1].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
+                break;
 
-    //        case 2:
-    //            heartsUI[1].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
-    //            break;
+            case 2:
+                heartsUI[1].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
+                break;
 
-    //        case 1:
-    //            heartsUI[2].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
-    //            break;
+            case 1:
+                heartsUI[2].gameObject.GetComponent<Image>().sprite = heartsSprite[1];
+                break;
 
-    //        case 0:
-    //            heartsUI[2].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
-    //            break;
+            case 0:
+                heartsUI[2].gameObject.GetComponent<Image>().sprite = heartsSprite[2];
+                break;
 
-    //        default:
-    //            break;
-    //    }
-    //}
+            default:
+                break;
+        }
+    }
     //public void LoadScene() {
     //    UnityEngine.SceneManager.instance.LoadScene("Menu", LoadSceneMode.Additive);
     //}

@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
 
 
+    [SerializeField] private AudioSource music;
     public static GameManager Instance;
-
     public GameObject losePanel;
 
     public bool losePanelIsOpen = true;
@@ -78,7 +78,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-
+    private void Music()
+    {
+        music.Play();
+    }
 
 }
 

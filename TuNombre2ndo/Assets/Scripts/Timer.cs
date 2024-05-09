@@ -33,19 +33,21 @@ public class Timer : MonoBehaviour
         }
         else timerUp = true;
         timerTotal = 0;
-        //if (TimerUp) {
-        //    GameManager.Instance.IsGameLose = true;
-        //}
+        if (timerUp)
+        {
+            GameManager.Instance.IsGameLose = true;
+        }
 
         textoUGUI.text = timeFormat();//pedir ayuda en ambois caso por overflow en stack 
     }
 
-    //public bool TimerUp {
-    //    // regresa un valor que esta afuera del script
-    //    get => TimerUp;
-    //    //establece un nuevo valor en una variable
-    //    set => TimerUp = value;
-    //}
+    public bool TimerUp
+    {
+        // regresa un valor que esta afuera del script
+        get => timerUp;
+        //establece un nuevo valor en una variable
+        set => timerUp = value;
+    }
 
     private string timeFormat()
     {
