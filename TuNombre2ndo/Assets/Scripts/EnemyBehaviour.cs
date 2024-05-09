@@ -20,8 +20,9 @@ public class EnemyBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
+
             parent.SetActive(false);
             PoinstManager.Instance.addPoints(points);
             if (activatedCoins)
