@@ -19,7 +19,6 @@ public class CoinBehaviour : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Player")) {
             PoinstManager.Instance.addPoints(value);
-            Debug.Log("tengo una moneda");
             Destroy(gameObject);
         }
     }

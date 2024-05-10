@@ -41,8 +41,8 @@ public class PatronEnemy : MonoBehaviour {
         //if (movEnemy )
         if (collision.gameObject.CompareTag("Player")) {
             // GameObject.Instantiate.GetComponent<PoinstManager>();
-            gameObject.GetComponent<PoinstManager>();//a ver si funciona esto 
-            Debug.Log("El jugador si me esta tocando");
+            gameObject.GetComponent<PoinstManager>();
+         
         }
         {
             if (collision.gameObject.CompareTag("Tilemap")) {

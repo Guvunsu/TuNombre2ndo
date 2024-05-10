@@ -33,7 +33,7 @@ public class PoinstManager : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Key")) {
 
-            Debug.Log("Lo Hemos Logrado");
+            
             //agregar una escena de victoria
         }
 
@@ -45,7 +45,7 @@ public class PoinstManager : MonoBehaviour {
     public void addPoints(int pointsToAdd) {
         points++;
         points += pointsToAdd;
-        Debug.Log(points);
+       // Debug.Log(points);
     }
     void Start() {
         points = 0;
