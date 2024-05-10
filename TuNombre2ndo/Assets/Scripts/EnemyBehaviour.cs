@@ -22,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        // hago que el enemigo sea el padre de las monedas , si muere el padre , aparecen las monedas en el mapa, si no ,no 
+        // hago que el enemigo sea el padre de las monedas , si muere el padre , aparecen las monedas en el mapa, si no ,no y accedo a los puntos 
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
