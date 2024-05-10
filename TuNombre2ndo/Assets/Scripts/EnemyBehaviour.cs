@@ -10,16 +10,20 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject coinsToSpawn;
     void Start()
     {
+        // hago que el objeto que lleve este script sea padre de algun otro objeto  
+
         parent = gameObject.transform.parent.gameObject;
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
+
+        // hago que el enemigo sea el padre de las monedas , si muere el padre , aparecen las monedas en el mapa, si no ,no 
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
 

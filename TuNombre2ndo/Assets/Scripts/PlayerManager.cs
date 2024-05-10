@@ -5,42 +5,47 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class PlayerManager : MonoBehaviour
-{
+public class PlayerManager : MonoBehaviour {
 
     private MovementPlayer movPlayer;
+    public GameObject losePanel;  // a ver si funciona mi logica 
     private Animator animator;
     public Timer timerLevel;
     public AudioSource audio;
 
-    public List<AudioClip> clips;
-    public List<Sprite> heartsSprite;//jalarlso desde la carpeta de sprites
-    public List<GameObject> heartsUI;//aqui jalo desde mis objetos de mi jerarquia
-
-    [SerializeField] private float healthTimer = 0.1f;
-    [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private int lives = 3;
-    [SerializeField] private int layerint;
-    [SerializeField] private Transform respawnPoints;
-    [SerializeField] private GameObject[] hearts;
+    public bool isAlive = true;
+    public string sceneManager;
+    public bool losePanelIsOpen = true;  //  a ver si funciona mi logica 
 
     bool key = false;
     int timerPoints;
 
-    public bool isAlive = true;
-    public string sceneManager;
+    public List<AudioClip> clips;
+    public List<Sprite> heartsSprite;
+    public List<GameObject> heartsUI;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Key"))
-        {
+    [SerializeField] private float healthTimer = 0.1f;
+    [SerializeField] private int lives = 3;
+    [SerializeField] private int layerint;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Transform respawnPoints;
+    [SerializeField] private GameObject[] hearts;
+
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+
+        // el OncollisionTrigger me sirve para tomar mis objetos del mapa 
+
+        if (collision.gameObject.CompareTag("Key")) {
+            collision.gameObject.transform.parent = gameObject.transform;
+            key = true;
             audio.clip = clips[0];
             audio.Play();
-            key = true;
-            collision.gameObject.transform.parent = gameObject.transform;
         }
-        if (collision.gameObject.CompareTag("Win") && key)
-        {
+        if (collision.gameObject.CompareTag("Win") && key) {
+
+            // si llevo la llave donde el objeto tenga el tag de Win podre ganar el nivel 
+
             timerPoints = (int)timerLevel.ReturnTimer();
             Time.timeScale = 0f;
             PoinstManager.Instance.addPoints(timerPoints);
@@ -49,38 +54,34 @@ public class PlayerManager : MonoBehaviour
 
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == layerint)
-        {
+    private void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.layer == layerint) {
             sprite.color = Color.white;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {//tal vez ni siquiera se llama asi el mio 
-            if (healthTimer > 0)
-            {
+    private void OnCollisionEnter2D(Collision2D collision) {
+
+        //esto sirve que si colisiono con mi enemigo me baja vida llamando funciones que estan mas abajo en este script
+
+        if (collision.gameObject.CompareTag("Enemy")) {
+            if (healthTimer > 0) {
                 isAlive = true;
                 arraylifeDamage();
                 PoinstManager.Instance.addPoints(timerPoints);
                 Destroy(collision.gameObject);
                 healthTimer -= Time.deltaTime;
-            }
-            else if (healthTimer <= 0 && lives >= 0)
-            {
+            } else if (healthTimer <= 0 && lives >= 0) {
+
+                //probar cambiar de >= a <=
+
                 Debug.Log("2");
                 lifeHeart();
                 lives--;
                 sprite.color = Color.blue;
-                if (lives <= 0)
-                {
+                if (lives <= 0) {
                     Debug.Log("3");
                     RestartPoint();
-                }
-                else if (lives > 0)
-                {
+                } else if (lives > 0) {
                     Debug.Log("4");
                     isAlive = false;
                     PlayerLose();
@@ -89,48 +90,55 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
-    public void lifeHeart()
-    {
+    public void lifeHeart() {
+
         //tengo 3 corazones , implemente un array para bajarme un corazon por cada daño que me hagan
-        if (lives < 4)
-        {
+
+        if (lives < 4) {
             //arraylifeDamage();
             //Destroy(hearts[2].gameObject);
             hearts[2].gameObject.SetActive(false);
             //animator.Play("hurt");
 
         }
-        if (lives < 3)
-        {
+        if (lives < 3) {
             //arraylifeDamage();
-            Destroy(hearts[1].gameObject);
+            hearts[1].gameObject.SetActive(false);
+            //Destroy(hearts[1].gameObject);
             //animator.Play("hurt");
         }
-        if (lives < 2)
-        {
+        if (lives < 2) {
             //arraylifeDamage();
-            Destroy(hearts[0].gameObject);
+            hearts[0].gameObject.SetActive(false);
+            //Destroy(hearts[0].gameObject);
             //animator.Play("hurt");
-            //} else if (lives < 1) {
-            //    Destroy(this.gameObject);
+            } else if (lives < 1) {
+               Destroy(this.gameObject);
+            losePanelIsOpen = true;
             //    animator.Play("Dead");
         }
 
     }
-    public void arraylifeDamage()
-    {
+    public void arraylifeDamage() {
+
+        //para bajar vida 
+
         lives--;
         lifeHeart();
     }
-    public void PlayerLose()
-    {
+    public void PlayerLose() {
+
+        //me bloquea movimiento del jugador si muere 
+
         movPlayer.DisableMovement();
         GameManager.Instance.IsGameLose = true;
 
     }
 
-    public void RestartPoint()
-    {
+    public void RestartPoint() {
+
+        // se reinicia los puntos cuando reincarno y me activa el movimeinto cuandomaparezco de nuevo 
+
         gameObject.transform.position = respawnPoints.position;
         sprite.color = Color.green;
         lives = 3;
@@ -169,25 +177,25 @@ public class PlayerManager : MonoBehaviour
     //            break;
     //    }
     //  }
+
+    // checar si esto me funciona 
+
     //public void LoadScene() {
     //    UnityEngine.SceneManager.instance.LoadScene("Menu", LoadSceneMode.Additive);
     //}
 
-    void Start()
-    {
+    void Start() {
         sprite = GetComponent<SpriteRenderer>();
-        gameObject.GetComponent<MovementPlayer>();//MovementPlayer=
+        gameObject.GetComponent<MovementPlayer>();
         lives = hearts.Length;
     }
-    private void Awake()
-    {
+    private void Awake() {
         GameManager.Instance.IsGameLose = false;
         GameManager.Instance.isGameWin = false;
     }
 
 
-    void Update()
-    {
+    void Update() {
 
     }
 }

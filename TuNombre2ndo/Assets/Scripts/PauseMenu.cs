@@ -6,22 +6,21 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 
-    public GameObject panel;// ponerlo en donde dice su nombre  
+    public GameObject panel;
     
     public bool gameIsPaused;
 
-    public void Reset()
-    {
+    public void Reset() {
         
     }
-    void Start()
-    {
+    void Start(){
 
     }
 
+    void Update() {
 
-    void Update()
-    {
+        //para pausar el juego con un input 
+
         if (Input.GetKeyDown(KeyCode.Escape)/* && GameManager.Instance.isGameWin && GameManager.Instance.IsGameLose == false*/)
         {
             gameIsPaused = !gameIsPaused;

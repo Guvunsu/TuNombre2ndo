@@ -5,11 +5,10 @@ using UnityEditor;
 using UnityEngine.SceneManagement;// aguregue este para el load
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
 
 
-    [SerializeField] private AudioSource music;
+    [SerializeField] private AudioSource audio;
     public static GameManager Instance;
     public GameObject losePanel;
 
@@ -20,57 +19,55 @@ public class GameManager : MonoBehaviour
     private bool isGameLose = false;
 
 
-    public bool IsGameWin
-    {
+    public bool IsGameWin {
         get => isGameWin;
         set => isGameWin = value;
     }
 
-    public bool IsGameLose
-    {
+    public bool IsGameLose {
         get => IsGameLose;
         set => isGameLose = value;
 
 
     }
-    private void Awake()
-    {// agregue esto con Carpi
-        if (Instance == null)
-        {
-            Instance = this;
+    private void Awake() {
 
-        }
-        else
-        {
+        //sirve para que no me destrruyan las escenas de los juegos y los llama
+
+        if (Instance == null) {
+            Instance = this;
+            music();
+        } else {
             Destroy(this);
         }
         DontDestroyOnLoad(this.gameObject);
 
     }
-    void Start()
-    {
+    void Start() {
         losePanelIsOpen = false;
         isGameWin = false;
     }
 
 
-    void Update()
-    {
-        if (isGameLose && !losePanelIsOpen)
-        {
+    void Update() {
+
+        //esta sirve para activar la escena de muerte/derrota cuando hayas perdido
+
+        if (isGameLose && !losePanelIsOpen) {
             Instantiate(losePanel);
             losePanelIsOpen = true;
-            //gameObject.SetActive(true);
-            //Debug.Log("GameOver");
+            gameObject.SetActive(true);
+            Debug.Log("GameOver");
         }
-        //if (Player == null)
-        //{
+        //if (Player == null) {
         //    Player = FindObjectOfType<PlayerManager>();
         //}
     }
 
-    public void sceneSwitch(string sceneName)
-    {//borrar mi scenemanager y usar el using 
+    public void sceneSwitch(string sceneName) {
+
+        //esto me hace cambiar de UI´s 
+
         losePanelIsOpen = false;
         winPanelIsOpen = false;
         isGameWin = false;
@@ -78,9 +75,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    private void Music()
-    {
-        music.Play();
+    private void music() {
+        audio.Play();
     }
 
 }

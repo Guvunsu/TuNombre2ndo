@@ -38,14 +38,17 @@ public class Timer : MonoBehaviour
             GameManager.Instance.IsGameLose = true;
         }
 
-        textoUGUI.text = timeFormat();//pedir ayuda en ambois caso por overflow en stack 
+        textoUGUI.text = timeFormat();
     }
 
     public bool TimerUp
     {
         // regresa un valor que esta afuera del script
+
         get => timerUp;
+
         //establece un nuevo valor en una variable
+
         set => timerUp = value;
     }
 
@@ -58,14 +61,14 @@ public class Timer : MonoBehaviour
         return timerString;
     }
 
-    //timer
-    //public void timer() {
-    //    if (timerTotal > 0 && !timerUp) {
-    //        timerTotal -= Time.deltaTime;
-    //    } else timerUp = true;
+    //timer  y probar esto que no recuerdo que es 
+    public void timer() {
+        if (timerTotal > 0 && !timerUp) {
+            timerTotal -= Time.deltaTime;
+        } else timerUp = true;
 
-    //    textTime.text = timeFormat();
-    //}
+        textoUGUI.text = timeFormat();
+    }
 
     //para resetear el timer
     public float ReturnTimer()

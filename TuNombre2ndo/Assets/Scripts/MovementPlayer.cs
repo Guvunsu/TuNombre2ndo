@@ -8,9 +8,7 @@ public class MovementPlayer : MonoBehaviour {
     private float MoveSpeed = 700;
     public float JumpForce;
     int Jumps = 0;
-    private bool isGrounded;
     public float gravity;
-    //bool TocoSuelo;
 
     //cosas de FixedUpdate Fisicas 
 
@@ -21,8 +19,8 @@ public class MovementPlayer : MonoBehaviour {
 
     // llamados de libreria 
 
-    [SerializeField]
-    private SpriteRenderer Sprite;
+    [SerializeField] private SpriteRenderer Sprite;
+
     private Rigidbody2D rbPlayer;
     private Animator animator;
     private BoxCollider2D boxCollider;
@@ -43,7 +41,7 @@ public class MovementPlayer : MonoBehaviour {
     }
     private void Movimiento() {
 
-        // sprint paramovimeinto normal y acelerado 
+        // sprint paramovimeinto acelerrado y normal
 
         if (Input.GetKey(KeyCode.LeftShift)) {
             MoveSpeed = 1400;
@@ -54,7 +52,7 @@ public class MovementPlayer : MonoBehaviour {
         }
 
 
-        // voltear sprite
+        // voltear sprite con IDLE
 
         if (Move.x > 0) {
             Sprite.flipX = false;
@@ -70,22 +68,13 @@ public class MovementPlayer : MonoBehaviour {
     private void Jump() {
         // salto
 
-        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2 /*&& isGrounded*/) {
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2) {
 
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
             Jumps++;
             animator.SetBool("Jumping", true);
-            // animator.SetBool("isGrounded", isGrounded);//agrege esto graias por Hugo 
             animator.SetBool("fall", true);
-            // if (!TocoSuelo)
-            // {
-            //animator.SetBool("Jumping", false);
-            //animator.SetBool("fall", false);
-            // }
-
         }
-
-
     }
 
     private void FixedUpdate() {
@@ -105,21 +94,23 @@ public class MovementPlayer : MonoBehaviour {
 
         Movimiento();
         Jump();
+        //agrego fisicas de gravedad reales/simuladas en el juego 
         Physics2D.gravity = gravity * Vector2.up;
 
     }
 
     public void DisableMovement() {
+        // me bloquea movimiento cuando pierdo 
         MoveSpeed = 0;
         JumpForce = 0;
     }
     public void EnableMovement() {
-
+        // esto lo uso para los breaks de los corazones , esperar si borro esta funcion y el break 
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
 
-        //    // resetear salto
+        // resetear salto
 
         if (collision.collider.CompareTag("Tilemap")) {
 

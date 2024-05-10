@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
 
     public void startGame() {
+
+        // cambia de escena de Menu a Gameplay cuando se lo solicito 
+
         GameManager.Instance.sceneSwitch("Gameplay");
     }
 

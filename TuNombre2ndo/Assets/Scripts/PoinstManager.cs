@@ -14,19 +14,33 @@ public class PoinstManager : MonoBehaviour {
     int points;
     // codigo para mi singleton 
     private void Awake() {
+
         //si hay una Instancia de mis pointsmanager , destruyeme si no lo soy 
+
         if (Instance != null && Instance != this) {
             Destroy(this);
         }
+
         //si la instancia es nula , yo soy la instancia 
+
         else {
             Instance = this;
         }
     }
     public void OnTriggerEnter2D(Collider2D collision) {
-        Debug.Log("Lo Hemos Logrado");
+
+        // esto deberi estar en el objeto de la puerta para ganar con la llave 
+
+        if (collision.gameObject.CompareTag("Key")) {
+
+            Debug.Log("Lo Hemos Logrado");
+            //agregar una escena de victoria
+        }
+
+        // agrega puntos y destruyo enemigos y monedas 
+
         points++;
-        Destroy(collision.gameObject);//tal vez le ponga mejor el (this)
+        Destroy(collision.gameObject);
     }
     public void addPoints(int pointsToAdd) {
         points++;
@@ -37,9 +51,10 @@ public class PoinstManager : MonoBehaviour {
         points = 0;
     }
 
-    // Update is called once per frame
+    //accedo desde el texto de mi TMPro de mi canvas de mis puntos y lo actualiza con addPoints 
+
     void Update() {
         textoUGUI.text = points.ToString();
     }
-   
+
 }

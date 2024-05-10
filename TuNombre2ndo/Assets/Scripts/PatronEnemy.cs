@@ -14,18 +14,12 @@ public class PatronEnemy : MonoBehaviour {
     private Vector2 Point;
     private Vector3 localScale;
 
-    [SerializeField]
-    private SpriteRenderer spritEnemy;
-    [SerializeField]
-    private GameObject PointA;
-    [SerializeField]
-    private GameObject PointB;
-    [SerializeField]
-    private Rigidbody2D Rb;
-    [SerializeField]
-    private Animator animator;
-    [SerializeField]
-    private Transform currentPoint;
+    [SerializeField] private SpriteRenderer spritEnemy;
+    [SerializeField] private GameObject PointA;
+    [SerializeField] private GameObject PointB;
+    [SerializeField] private Rigidbody2D Rb;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform currentPoint;
 
 
     public float speed = 2.0f;
