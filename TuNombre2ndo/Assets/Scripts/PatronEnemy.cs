@@ -7,10 +7,10 @@ using UnityEngine.UIElements;
 public class PatronEnemy : MonoBehaviour {
 
     //https://www.youtube.com/watch?v=RuvfOl8HhhM
+    // practicamente copie casi todo el codigo 
 
     public float dt;
 
-    private Vector2 movEnemy;
     private Vector2 Point;
     private Vector3 localScale;
 
@@ -18,7 +18,6 @@ public class PatronEnemy : MonoBehaviour {
     [SerializeField] private GameObject PointA;
     [SerializeField] private GameObject PointB;
     [SerializeField] private Rigidbody2D Rb;
-    [SerializeField] private Animator animator;
     [SerializeField] private Transform currentPoint;
 
 
@@ -26,35 +25,16 @@ public class PatronEnemy : MonoBehaviour {
 
     void Start() {
         Rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         currentPoint = PointB.transform;
         currentPoint = PointA.transform;
-        animator.SetBool("Walking", true);
+        
     }
 
     // Update is called once per frame
     void Update() {
         moveEnemy();
     }
-    private void OnCollisionEnter2D(Collision2D collision) {
-        dt = Time.deltaTime;
-        //if (movEnemy )
-        if (collision.gameObject.CompareTag("Player")) {
-            // GameObject.Instantiate.GetComponent<PoinstManager>();
-            gameObject.GetComponent<PoinstManager>();
-         
-        }
-        {
-            if (collision.gameObject.CompareTag("Tilemap")) {
-                movEnemy = new Vector2(speed, 1);
-                moveEnemy();
-                flip();
-
-            }
-
-
-        }
-    }
+   
     private void moveEnemy() {
         Point = currentPoint.position - transform.position;
         if (currentPoint == PointB.transform) {
@@ -62,7 +42,7 @@ public class PatronEnemy : MonoBehaviour {
         } else
             Rb.velocity = new Vector2(-speed, 0);
 
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == PointB.transform) {
+        if (Vector2.Distance(transform.position, currentPoint.position) < -0.5f && currentPoint == PointB.transform) {
             flip();
             currentPoint = PointA.transform;
         }
@@ -70,14 +50,6 @@ public class PatronEnemy : MonoBehaviour {
         if (Vector2.Distance(transform.position, currentPoint.position) < 0.1f && currentPoint == PointA.transform) {
             flip();
             currentPoint = PointB.transform;
-        }
-        if (movEnemy.x > 0) {
-            spritEnemy.flipX = false;
-            animator.SetBool("Walking", true);
-
-        } else if (movEnemy.x < 0) {
-            spritEnemy.flipX = true;
-            animator.SetBool("Walking", true);
         }
 
     }

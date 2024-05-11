@@ -44,8 +44,8 @@ public class PlayerManager : MonoBehaviour {
         if (collision.gameObject.CompareTag("Key")) {
             collision.gameObject.transform.parent = gameObject.transform;
             key = true;
-            GetComponent<AudioSource>().clip = clips[0];
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().clip = clips[0];
+            //GetComponent<AudioSource>().Play();
         }
         if (collision.gameObject.CompareTag("Win") && key) {
 
@@ -60,12 +60,27 @@ public class PlayerManager : MonoBehaviour {
 
         }
 
-        //para destruir el enemigo sin recibir daño alguno
+        //esto sirve que si colisiono con mi enemigo me baja vida llamando funciones que estan mas abajo en este script      
 
         if (collision.gameObject.CompareTag("Enemy")) {
+            if (healthTimer > 0) {
+                isAlive = true;
+                arraylifeDamage();
+                //PoinstManager.Instance.addPoints(timerPoints);
+                //Destroy(collision.gameObject);
+                healthTimer -= Time.deltaTime;
+            } else if (healthTimer <= 0 && lives <= 0) {
+                arraylifeDamage();
+                sprite.color = Color.blue;
+                if (lives <= 0) {
+                    RestartPoint();
+                } else if (lives < 0) {
+                    isAlive = false;
+                    playerLose();
+                }
+                healthTimer = 0.1f;
+            }
 
-            PoinstManager.Instance.addPoints(timerPoints);
-            Destroy(collision.gameObject);
         }
 
     }
@@ -88,26 +103,11 @@ public class PlayerManager : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        //esto sirve que si colisiono con mi enemigo me baja vida llamando funciones que estan mas abajo en este script
+        //para destruir el enemigo sin recibir daño alguno
 
         if (collision.gameObject.CompareTag("Enemy")) {
-            if (healthTimer > 0) {
-                isAlive = true;
-                arraylifeDamage();
-                //PoinstManager.Instance.addPoints(timerPoints);
-                //Destroy(collision.gameObject);
-                healthTimer -= Time.deltaTime;
-            } else if (healthTimer <= 0 && lives <= 0) {
-                arraylifeDamage();
-                sprite.color = Color.blue;
-                if (lives <= 0) {
-                    RestartPoint();
-                } else if (lives < 0) {
-                    isAlive = false;
-                    playerLose();
-                }
-                healthTimer = 0.1f;
-            }
+            PoinstManager.Instance.addPoints(timerPoints);
+            Destroy(collision.gameObject);
         }
     }
 
