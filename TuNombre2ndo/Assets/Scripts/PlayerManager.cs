@@ -12,9 +12,9 @@ public class PlayerManager : MonoBehaviour
     private MovementPlayer movPlayer;
     public GameObject losePanel;
     public GameObject winPanel;
-    // private Animator animator;
     public Timer timerLevel;
-    public AudioSource audio;
+    // private Animator animator;
+    //public AudioSource audio;
     public LayerMask ZonaDeMuerte;
 
     public bool isAlive = true;
@@ -47,8 +47,8 @@ public class PlayerManager : MonoBehaviour
         {
             collision.gameObject.transform.parent = gameObject.transform;
             key = true;
-            audio.clip = clips[0];
-            audio.Play();
+            GetComponent<AudioSource>().clip = clips[0];
+            GetComponent<AudioSource>().Play();
         }
         if (collision.gameObject.CompareTag("Win") && key)
         {
@@ -123,7 +123,7 @@ public class PlayerManager : MonoBehaviour
     public void lifeHeart()
     {
 
-        //tengo 3 corazones , implemente un array para bajarme un corazon por cada daño que me hagan
+        //tengo 3 corazones , implemente un array para bajarme un corazon por cada daï¿½o que me hagan
 
         if (lives < 4)
         {

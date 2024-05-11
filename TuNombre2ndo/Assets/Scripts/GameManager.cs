@@ -8,7 +8,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private AudioSource audio;
+    //[SerializeField] private AudioSource audio;
     public static GameManager Instance;
 
     public bool losePanelIsOpen = false;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            music();
+           // music();
         }
         else
         {
@@ -77,10 +77,10 @@ public class GameManager : MonoBehaviour
         winPanelIsOpen = true;
     }
 
-    private void music()
-    {
-        audio.Play();
-    }
+    //private void music()
+    //{
+    //    audio.Play();
+    //}
 
     void Update()
     {
