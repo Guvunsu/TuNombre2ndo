@@ -103,7 +103,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        //para destruir el enemigo sin recibir daño alguno
+        //para destruir el enemigo sin recibir daño alguno y sumo puntos 
 
         if (collision.gameObject.CompareTag("Enemy")) {
             PoinstManager.Instance.addPoints(timerPoints);
